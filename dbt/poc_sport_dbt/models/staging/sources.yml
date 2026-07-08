@@ -1,0 +1,45 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    description: "Données brutes ingérées depuis S3/LocalStack"
+    tables:
+      - name: employees
+        description: "Salariés de l'entreprise"
+        columns:
+          - name: id
+            description: "Identifiant unique du salarié"
+            tests:
+              - unique
+              - not_null
+          - name: actif
+            description: "Salarié actif ou non"
+
+      - name: activities
+        description: "Activités sportives des salariés"
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
+          - name: id_salarie
+            tests:
+              - not_null
+              - relationships:
+                  to: source('raw', 'employees')
+                  field: id
+
+      - name: distances
+        description: "Distances domicile-travail calculées"
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
+          - name: id_salarie
+            tests:
+              - not_null
+              - relationships:
+                  to: source('raw', 'employees')
+                  field: id

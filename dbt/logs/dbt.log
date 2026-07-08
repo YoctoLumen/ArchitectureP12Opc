@@ -1,0 +1,229 @@
+[0m08:14:54.301970 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7aabf30f3d90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7aabf3e5ca50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7aabf36d1050>]}
+
+
+============================== 08:14:54.311001 | 68a61ec1-be2a-4ce4-88a8-a02acb720c59 ==============================
+[0m08:14:54.311001 [info ] [MainThread]: Running with dbt=1.7.0
+[0m08:14:54.312618 [debug] [MainThread]: running dbt with arguments {'log_format': 'default', 'send_anonymous_usage_stats': 'True', 'target_path': 'None', 'log_cache_events': 'False', 'use_colors': 'True', 'printer_width': '80', 'profiles_dir': '/dbt', 'version_check': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'quiet': 'False', 'partial_parse': 'True', 'invocation_command': 'dbt init poc_sport_dbt', 'use_experimental_parser': 'False', 'indirect_selection': 'eager', 'debug': 'False', 'introspect': 'True', 'log_path': 'logs', 'static_parser': 'True', 'warn_error': 'None', 'cache_selected_only': 'False', 'no_print': 'None', 'write_json': 'True', 'fail_fast': 'False'}
+[0m08:14:54.315595 [debug] [MainThread]: Starter project path: /usr/local/lib/python3.11/site-packages/dbt/include/starter_project
+[0m08:14:54.518931 [info ] [MainThread]: 
+Your new dbt project "poc_sport_dbt" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m08:14:54.520890 [info ] [MainThread]: Setting up your profile.
+[0m08:15:12.927913 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7aabf3bcb290>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7aabf303d510>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7aabf8025350>]}
+[0m08:15:12.929999 [debug] [MainThread]: Flushing usage events
+[0m10:02:32.210701 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001DE888D7210>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001DE8895F5D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001DE8895FB10>]}
+
+
+============================== 10:02:32.217316 | 44ed9452-6f2e-49ba-86db-7ae7365f74fb ==============================
+[0m10:02:32.217316 [info ] [MainThread]: Running with dbt=1.12.0-b3
+[0m10:02:32.217865 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'maximum_seed_size_mib': '1', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'C:\\Users\\MMVK5803\\OneDrive - orange.com\\Documents\\Projet OpenClassroom\\Formation Data Engineer\\Projet 12 DataEngineer\\poc-avantages-sportifs\\dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'indirect_selection': 'eager', 'invocation_command': 'dbt debug', 'use_colors': 'True', 'use_experimental_parser': 'False', 'log_path': 'C:\\Users\\MMVK5803\\OneDrive - orange.com\\Documents\\Projet OpenClassroom\\Formation Data Engineer\\Projet 12 DataEngineer\\poc-avantages-sportifs\\dbt\\logs'}
+[0m10:02:32.249582 [info ] [MainThread]: dbt version: 1.12.0-b3
+[0m10:02:32.250595 [info ] [MainThread]: python version: 3.11.9
+[0m10:02:32.251588 [info ] [MainThread]: python path: C:\Users\MMVK5803\OneDrive - orange.com\Documents\Projet OpenClassroom\Formation Data Engineer\Projet 12 DataEngineer\envP12De\Scripts\python.exe
+[0m10:02:32.252804 [info ] [MainThread]: os info: Windows-10-10.0.22631-SP0
+[0m10:02:32.322844 [info ] [MainThread]: Using profiles dir at C:\Users\MMVK5803\OneDrive - orange.com\Documents\Projet OpenClassroom\Formation Data Engineer\Projet 12 DataEngineer\poc-avantages-sportifs\dbt
+[0m10:02:32.323943 [info ] [MainThread]: Using profiles.yml file at C:\Users\MMVK5803\OneDrive - orange.com\Documents\Projet OpenClassroom\Formation Data Engineer\Projet 12 DataEngineer\poc-avantages-sportifs\dbt\profiles.yml
+[0m10:02:32.324955 [info ] [MainThread]: Using dbt_project.yml file at C:\Users\MMVK5803\OneDrive - orange.com\Documents\Projet OpenClassroom\Formation Data Engineer\Projet 12 DataEngineer\poc-avantages-sportifs\dbt\dbt_project.yml
+[0m10:02:32.327514 [info ] [MainThread]: adapter type: postgres
+[0m10:02:32.328022 [info ] [MainThread]: adapter version: 1.10.2
+[0m10:02:32.459119 [info ] [MainThread]: Configuration:
+[0m10:02:32.460130 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m10:02:32.461130 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m10:02:32.463129 [info ] [MainThread]: Required dependencies:
+[0m10:02:32.464133 [debug] [MainThread]: Executing "git --help"
+[0m10:02:32.527136 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Reset current HEAD to the specified state\n   switch     Switch branches\n   tag        Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m10:02:32.528700 [debug] [MainThread]: STDERR: "b''"
+[0m10:02:32.529716 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m10:02:32.532312 [info ] [MainThread]: Connection:
+[0m10:02:32.533316 [info ] [MainThread]:   host: postgres
+[0m10:02:32.534314 [info ] [MainThread]:   port: 5432
+[0m10:02:32.535315 [info ] [MainThread]:   user: etl_user
+[0m10:02:32.537327 [info ] [MainThread]:   database: poc_sport
+[0m10:02:32.537327 [info ] [MainThread]:   schema: public
+[0m10:02:32.539850 [info ] [MainThread]:   connect_timeout: 10
+[0m10:02:32.541103 [info ] [MainThread]:   role: None
+[0m10:02:32.542112 [info ] [MainThread]:   search_path: None
+[0m10:02:32.543121 [info ] [MainThread]:   keepalives_idle: 0
+[0m10:02:32.543633 [info ] [MainThread]:   sslmode: None
+[0m10:02:32.544734 [info ] [MainThread]:   sslcert: None
+[0m10:02:32.546925 [info ] [MainThread]:   sslkey: None
+[0m10:02:32.547435 [info ] [MainThread]:   sslrootcert: None
+[0m10:02:32.549029 [info ] [MainThread]:   application_name: dbt
+[0m10:02:32.549973 [info ] [MainThread]:   retries: 1
+[0m10:02:32.551974 [info ] [MainThread]: Registered adapter: postgres=1.10.2
+[0m10:02:33.006938 [debug] [MainThread]: Acquiring new postgres connection 'debug'
+[0m10:02:33.112202 [debug] [MainThread]: Using postgres connection "debug"
+[0m10:02:33.113203 [debug] [MainThread]: On debug: select 1 as id
+[0m10:02:33.113203 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m10:02:34.252474 [debug] [MainThread]: Postgres adapter: Got a retryable error when attempting to open a postgres connection.
+1 attempts remaining. Retrying in 0 seconds.
+Error:
+could not translate host name "postgres" to address: Name or service not known
+
+[0m10:02:35.257238 [debug] [MainThread]: Postgres adapter: Error running SQL: select 1 as id
+[0m10:02:35.258244 [debug] [MainThread]: Postgres adapter: Rolling back transaction.
+[0m10:02:35.258244 [debug] [MainThread]: On debug: No close available on handle
+[0m10:02:35.259644 [info ] [MainThread]:   Connection test: [[31mERROR[0m]
+
+[0m10:02:35.261048 [info ] [MainThread]: [31m1 check failed:[0m
+[0m10:02:35.261048 [info ] [MainThread]: dbt was unable to connect to the specified database.
+The database returned the following error:
+
+  >Database Error
+  could not translate host name "postgres" to address: Name or service not known
+  
+
+Check your database credentials and try again. For more information, visit:
+https://docs.getdbt.com/docs/configure-your-profile
+
+
+[0m10:02:35.264654 [debug] [MainThread]: Command `dbt debug` failed at 10:02:35.264654 after 3.19 seconds
+[0m10:02:35.264654 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m10:02:35.265660 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001DE888D2C90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001DE807458D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001DE86521090>]}
+[0m10:02:35.266669 [debug] [MainThread]: Flushing usage events
+[0m10:02:36.371155 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m08:06:02.855452 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x77ee270cdfd0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x77ee27098810>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x77ee270ce110>]}
+
+
+============================== 08:06:02.864662 | 3ee06d6b-e1c9-415a-9098-02fcb799a388 ==============================
+[0m08:06:02.864662 [info ] [MainThread]: Running with dbt=1.7.0
+[0m08:06:02.866840 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'indirect_selection': 'eager', 'write_json': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'use_colors': 'True', 'log_path': '/dbt/logs', 'cache_selected_only': 'False', 'profiles_dir': '/dbt', 'log_cache_events': 'False', 'quiet': 'False', 'no_print': 'None', 'use_experimental_parser': 'False', 'target_path': 'None', 'introspect': 'True', 'log_format': 'default', 'warn_error': 'None', 'partial_parse': 'True', 'static_parser': 'True', 'debug': 'False', 'send_anonymous_usage_stats': 'True', 'printer_width': '80', 'invocation_command': 'dbt debug', 'fail_fast': 'False'}
+[0m08:06:02.870262 [info ] [MainThread]: dbt version: 1.7.0
+[0m08:06:02.872031 [info ] [MainThread]: python version: 3.11.15
+[0m08:06:02.873769 [info ] [MainThread]: python path: /usr/local/bin/python3.11
+[0m08:06:02.875390 [info ] [MainThread]: os info: Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.41
+[0m08:06:03.005695 [info ] [MainThread]: Using profiles dir at /dbt
+[0m08:06:03.007778 [info ] [MainThread]: Using profiles.yml file at /dbt/profiles.yml
+[0m08:06:03.009571 [info ] [MainThread]: Using dbt_project.yml file at /dbt/dbt_project.yml
+[0m08:06:03.012263 [info ] [MainThread]: adapter type: postgres
+[0m08:06:03.014183 [info ] [MainThread]: adapter version: 1.7.0
+[0m08:06:03.098483 [info ] [MainThread]: Configuration:
+[0m08:06:03.100786 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m08:06:03.103098 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m08:06:03.105520 [info ] [MainThread]: Required dependencies:
+[0m08:06:03.107406 [debug] [MainThread]: Executing "git --help"
+[0m08:06:03.110496 [info ] [MainThread]:  - git [[31mERROR[0m]
+
+[0m08:06:03.112048 [info ] [MainThread]: Connection:
+[0m08:06:03.113764 [info ] [MainThread]:   host: postgres
+[0m08:06:03.115584 [info ] [MainThread]:   port: 5432
+[0m08:06:03.117485 [info ] [MainThread]:   user: etl_user
+[0m08:06:03.119437 [info ] [MainThread]:   database: poc_sport
+[0m08:06:03.121426 [info ] [MainThread]:   schema: public
+[0m08:06:03.123184 [info ] [MainThread]:   connect_timeout: 10
+[0m08:06:03.125042 [info ] [MainThread]:   role: None
+[0m08:06:03.127305 [info ] [MainThread]:   search_path: None
+[0m08:06:03.129347 [info ] [MainThread]:   keepalives_idle: 0
+[0m08:06:03.131108 [info ] [MainThread]:   sslmode: None
+[0m08:06:03.133335 [info ] [MainThread]:   sslcert: None
+[0m08:06:03.135104 [info ] [MainThread]:   sslkey: None
+[0m08:06:03.137014 [info ] [MainThread]:   sslrootcert: None
+[0m08:06:03.138745 [info ] [MainThread]:   application_name: dbt
+[0m08:06:03.140372 [info ] [MainThread]:   retries: 1
+[0m08:06:03.142370 [info ] [MainThread]: Registered adapter: postgres=1.7.0
+[0m08:06:03.144857 [debug] [MainThread]: Acquiring new postgres connection 'debug'
+[0m08:06:03.146483 [debug] [MainThread]: Using postgres connection "debug"
+[0m08:06:03.148082 [debug] [MainThread]: On debug: select 1 as id
+[0m08:06:03.149533 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m08:06:03.162599 [debug] [MainThread]: SQL status: SELECT 1 in 0.0 seconds
+[0m08:06:03.165792 [debug] [MainThread]: On debug: Close
+[0m08:06:03.167739 [info ] [MainThread]:   Connection test: [[32mOK connection ok[0m]
+
+[0m08:06:03.169841 [info ] [MainThread]: [31m1 check failed:[0m
+[0m08:06:03.172195 [info ] [MainThread]: Error from git --help: Could not find command, ensure it is in the user's PATH: "git"
+
+[0m08:06:03.176078 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m08:06:03.178101 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x77ee26f13150>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x77ee25f27e50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x77ee263f30d0>]}
+[0m08:06:03.179703 [debug] [MainThread]: Flushing usage events
+[0m08:08:04.604410 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x73c00f815a10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x73c00f791e50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x73c00f816410>]}
+
+
+============================== 08:08:04.608825 | c06b70fb-fd8c-49bb-8dd5-d2f9ff4f79bf ==============================
+[0m08:08:04.608825 [info ] [MainThread]: Running with dbt=1.7.0
+[0m08:08:04.610897 [debug] [MainThread]: running dbt with arguments {'cache_selected_only': 'False', 'debug': 'False', 'no_print': 'None', 'static_parser': 'True', 'invocation_command': 'dbt run', 'log_path': '/dbt/logs', 'version_check': 'True', 'log_cache_events': 'False', 'profiles_dir': '/dbt', 'log_format': 'default', 'indirect_selection': 'eager', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'quiet': 'False', 'warn_error': 'None', 'fail_fast': 'False', 'printer_width': '80', 'use_experimental_parser': 'False', 'partial_parse': 'True', 'write_json': 'True', 'send_anonymous_usage_stats': 'True', 'target_path': 'None', 'use_colors': 'True', 'introspect': 'True'}
+[0m08:08:04.787158 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'c06b70fb-fd8c-49bb-8dd5-d2f9ff4f79bf', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x73c00f67ff50>]}
+[0m08:08:04.872313 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'c06b70fb-fd8c-49bb-8dd5-d2f9ff4f79bf', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x73c00f727bd0>]}
+[0m08:08:04.874751 [info ] [MainThread]: Registered adapter: postgres=1.7.0
+[0m08:08:04.884029 [debug] [MainThread]: checksum: 8434eacd4ffdf0ca3ab22bf0e2d55b45306c9599613e842b959405abc489e606, vars: {}, profile: , target: , version: 1.7.0
+[0m08:08:04.890311 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m08:08:04.892132 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': 'c06b70fb-fd8c-49bb-8dd5-d2f9ff4f79bf', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x73c00ed58390>]}
+[0m08:08:05.563804 [warn ] [MainThread]: [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 3 unused configuration paths:
+- models.poc_sport_dbt.mart
+- models.poc_sport_dbt.staging
+- models.poc_sport_dbt.intermediate
+[0m08:08:05.569691 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'c06b70fb-fd8c-49bb-8dd5-d2f9ff4f79bf', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x73c01462edd0>]}
+[0m08:08:05.605472 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'c06b70fb-fd8c-49bb-8dd5-d2f9ff4f79bf', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x73c00e5b7450>]}
+[0m08:08:05.607631 [info ] [MainThread]: Found 0 sources, 0 exposures, 0 metrics, 401 macros, 0 groups, 0 semantic models
+[0m08:08:05.609634 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'c06b70fb-fd8c-49bb-8dd5-d2f9ff4f79bf', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x73c00ecb3a50>]}
+[0m08:08:05.613708 [info ] [MainThread]: 
+[0m08:08:05.616052 [warn ] [MainThread]: Nothing to do. Try checking your model configs and model specification args
+[0m08:08:05.618319 [debug] [MainThread]: Command end result
+[0m08:08:05.644715 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x73c00f792510>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x73c01476d090>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x73c01476d310>]}
+[0m08:08:05.646967 [debug] [MainThread]: Flushing usage events
+[0m08:10:31.635232 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c67d4fea710>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c67d6531350>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c67d4e1e910>]}
+
+
+============================== 08:10:31.640041 | 0f3e5744-65f2-441f-9ac7-6baf780888b9 ==============================
+[0m08:10:31.640041 [info ] [MainThread]: Running with dbt=1.7.0
+[0m08:10:31.642952 [debug] [MainThread]: running dbt with arguments {'cache_selected_only': 'False', 'partial_parse': 'True', 'fail_fast': 'False', 'write_json': 'True', 'use_colors': 'True', 'log_cache_events': 'False', 'version_check': 'True', 'log_path': '/dbt/logs', 'indirect_selection': 'eager', 'quiet': 'False', 'profiles_dir': '/dbt', 'printer_width': '80', 'target_path': 'None', 'warn_error': 'None', 'log_format': 'default', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'use_experimental_parser': 'False', 'debug': 'False', 'introspect': 'True', 'invocation_command': 'dbt run', 'no_print': 'None', 'send_anonymous_usage_stats': 'True', 'static_parser': 'True'}
+[0m08:10:31.801650 [error] [MainThread]: Encountered an error:
+Runtime Error
+  at path []: Additional properties are not allowed ('project-dir' was unexpected)
+
+Error encountered in /dbt/dbt_project.yml
+[0m08:10:31.804483 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c67d4e4bf50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c67d9f2d110>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7c67d9f2ce50>]}
+[0m08:10:31.806169 [debug] [MainThread]: Flushing usage events
+[0m08:11:41.637032 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f80962d3610>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8096dae1d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f8096c0f310>]}
+
+
+============================== 08:11:41.641697 | bdd66e6e-9706-4fbb-bb1f-01a48ced1d37 ==============================
+[0m08:11:41.641697 [info ] [MainThread]: Running with dbt=1.7.0
+[0m08:11:41.643695 [debug] [MainThread]: running dbt with arguments {'log_format': 'default', 'printer_width': '80', 'debug': 'False', 'indirect_selection': 'eager', 'write_json': 'True', 'fail_fast': 'False', 'cache_selected_only': 'False', 'no_print': 'None', 'introspect': 'True', 'log_path': '/dbt/logs', 'invocation_command': 'dbt run', 'quiet': 'False', 'use_experimental_parser': 'False', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True', 'target_path': 'None', 'profiles_dir': '/dbt', 'use_colors': 'True', 'log_cache_events': 'False', 'warn_error': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'version_check': 'True', 'partial_parse': 'True'}
+[0m08:11:41.821262 [error] [MainThread]: Encountered an error:
+Runtime Error
+  at path []: Additional properties are not allowed ('project-dir' was unexpected)
+
+Error encountered in /dbt/dbt_project.yml
+[0m08:11:41.824922 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f809b20d2d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f809b20cf10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f80951bc690>]}
+[0m08:11:41.827341 [debug] [MainThread]: Flushing usage events
+[0m08:12:51.256385 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7cd2c406fcd0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7cd2c3fb54d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7cd2c44e74d0>]}
+
+
+============================== 08:12:51.261236 | 4b483231-de91-4e1b-9141-12f5bfa720cb ==============================
+[0m08:12:51.261236 [info ] [MainThread]: Running with dbt=1.7.0
+[0m08:12:51.263282 [debug] [MainThread]: running dbt with arguments {'log_format': 'default', 'printer_width': '80', 'invocation_command': 'dbt run', 'target_path': 'None', 'version_check': 'True', 'use_colors': 'True', 'no_print': 'None', 'fail_fast': 'False', 'introspect': 'True', 'partial_parse': 'True', 'debug': 'False', 'log_cache_events': 'False', 'static_parser': 'True', 'warn_error': 'None', 'log_path': '/dbt/logs', 'send_anonymous_usage_stats': 'True', 'cache_selected_only': 'False', 'write_json': 'True', 'use_experimental_parser': 'False', 'profiles_dir': '/dbt', 'indirect_selection': 'eager', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])'}
+[0m08:12:51.421432 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '4b483231-de91-4e1b-9141-12f5bfa720cb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7cd2c3eb8150>]}
+[0m08:12:51.496251 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '4b483231-de91-4e1b-9141-12f5bfa720cb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7cd2c2fafc10>]}
+[0m08:12:51.498509 [info ] [MainThread]: Registered adapter: postgres=1.7.0
+[0m08:12:51.514596 [debug] [MainThread]: checksum: 8434eacd4ffdf0ca3ab22bf0e2d55b45306c9599613e842b959405abc489e606, vars: {}, profile: , target: , version: 1.7.0
+[0m08:12:51.534555 [info ] [MainThread]: Unable to do partial parsing because a project config has changed
+[0m08:12:51.536495 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '4b483231-de91-4e1b-9141-12f5bfa720cb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7cd2c4b61cd0>]}
+[0m08:12:52.205450 [warn ] [MainThread]: [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 3 unused configuration paths:
+- models.poc_sport_dbt.intermediate
+- models.poc_sport_dbt.staging
+- models.poc_sport_dbt.mart
+[0m08:12:52.212539 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '4b483231-de91-4e1b-9141-12f5bfa720cb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7cd2c2bbe2d0>]}
+[0m08:12:52.244129 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '4b483231-de91-4e1b-9141-12f5bfa720cb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7cd2c2bc3c50>]}
+[0m08:12:52.246240 [info ] [MainThread]: Found 0 sources, 0 exposures, 0 metrics, 401 macros, 0 groups, 0 semantic models
+[0m08:12:52.248596 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '4b483231-de91-4e1b-9141-12f5bfa720cb', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7cd2c27edd90>]}
+[0m08:12:52.252010 [info ] [MainThread]: 
+[0m08:12:52.253827 [warn ] [MainThread]: Nothing to do. Try checking your model configs and model specification args
+[0m08:12:52.256004 [debug] [MainThread]: Command end result
+[0m08:12:52.281891 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7cd2c8fc1090>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7cd2c2bf7f10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7cd2c8fc1310>]}
+[0m08:12:52.283864 [debug] [MainThread]: Flushing usage events

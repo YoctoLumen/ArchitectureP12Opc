@@ -1,0 +1,164 @@
+services:
+  localstack:
+    image: localstack/localstack:3.8.0
+    container_name: localstack
+    ports:
+      - "4566:4566"
+      - "4510-4559:4510-4559"
+    env_file:
+      - .env
+    environment:
+      - SERVICES=s3,sqs,secretsmanager,iam
+      - DEFAULT_REGION=eu-west-1
+      - AWS_DEFAULT_REGION=eu-west-1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - GOOGLE_MAPS_API_KEY=${GOOGLE_MAPS_API_KEY}   
+      - SLACK_TOKEN=${SLACK_TOKEN}                 
+      - SLACK_CHANNEL=${SLACK_CHANNEL}              
+      - POSTGRES_USER=${POSTGRES_USER}              
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - "./localstack/init-scripts:/etc/localstack/init/ready.d"
+      - "./data/excel:/tmp/excel"
+      - "./data/json:/tmp/json"
+      - "localstack_data:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - network-ingestion   
+      - network-storage     
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4566/_localstack/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - network-storage     
+      - network-processing
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U poc_user -d poc_sport"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  kestra:
+    image: kestra/kestra:latest-full
+    container_name: kestra
+    user: "root"
+    entrypoint: >
+      /bin/sh -c "
+      apt-get update -qq &&
+      apt-get install -y docker.io -qq &&
+      exec /app/kestra server standalone --flow-path /app/flows
+      "
+    depends_on:
+      postgres:
+        condition: service_healthy
+      localstack:
+        condition: service_healthy
+      dbt:
+        condition: service_started
+    environment:
+      KESTRA_CONFIGURATION: |
+        datasources:
+          postgres:
+            url: jdbc:postgresql://postgres:5432/kestra
+            driverClassName: org.postgresql.Driver
+            username: poc_user
+            password: poc_password
+        kestra:
+          repository:
+            type: postgres
+          storage:
+            type: local
+            local:
+              base-path: /app/storage
+          variables:
+            globals:
+              excel_path: /tmp/excel
+              json_path: /tmp/json
+          queue:
+            type: postgres
+          server:
+            basic-auth:
+              enabled: false
+      ORS_API_KEY: ${ORS_API_KEY}
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_ENDPOINT_URL: http://localstack:4566
+      AWS_DEFAULT_REGION: eu-west-1
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./data_generation:/app/scripts 
+      - /var/run/docker.sock:/var/run/docker.sock
+      - kestra_storage:/app/storage
+      - "./kestra/flows:/app/flows"
+      - "./data/excel:/tmp/excel"
+      - "./data/json:/tmp/json"
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    networks:
+      - network-processing
+      - network-ingestion
+      - network-storage     
+
+  data-generator:
+    build:
+      context: ./data_generation
+      dockerfile: Dockerfile
+    container_name: data-generator
+    volumes:
+      - "./data/excel:/tmp/excel"     
+      - "./data/json:/tmp/json"       
+    env_file:
+      - .env
+    networks:
+      - network-ingestion
+      - network-storage
+    restart: unless-stopped
+
+  dbt:
+    build:
+      context: ./dbt
+      dockerfile: Dockerfile
+    container_name: dbt
+    volumes:
+      - ./dbt:/dbt
+    networks:
+      - network-storage
+      - network-processing
+    depends_on:
+      - postgres
+    environment:
+      DBT_PROFILES_DIR: /dbt
+    command: tail -f /dev/null
+
+networks:
+  network-ingestion:
+    driver: bridge
+  network-processing:
+    driver: bridge
+  network-storage:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  localstack_data:
+  kestra_storage:

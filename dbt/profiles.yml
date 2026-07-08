@@ -1,0 +1,12 @@
+poc_sport_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: postgres
+      port: 5432
+      user: etl_user
+      password: etl_password
+      dbname: poc_sport
+      schema: public
+      threads: 4

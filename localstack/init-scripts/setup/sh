@@ -1,0 +1,89 @@
+#!/bin/bash
+
+echo "🚀 Démarrage de l'initialisation LocalStack..."
+
+# Configuration de l'endpoint local
+ENDPOINT="http://localhost:4566"
+REGION="eu-west-1"
+
+echo "📦 Création des buckets S3..."
+
+awslocal s3 mb s3://poc-sport-raw \
+  --region $REGION
+echo "  ✅ Bucket poc-sport-raw créé"
+
+awslocal s3 mb s3://poc-sport-processed \
+  --region $REGION
+echo "  ✅ Bucket poc-sport-processed créé"
+
+awslocal s3 mb s3://poc-sport-reports \
+  --region $REGION
+echo "  ✅ Bucket poc-sport-reports créé"
+
+# Structure des dossiers dans S3 (via fichiers vides)
+awslocal s3api put-object --bucket poc-sport-raw --key rh/
+awslocal s3api put-object --bucket poc-sport-raw --key strava/
+awslocal s3api put-object --bucket poc-sport-raw --key google-maps/
+awslocal s3api put-object --bucket poc-sport-reports --key great-expectations/
+echo "  ✅ Structure des dossiers S3 créée"
+
+echo "📨 Création des queues SQS..."
+
+awslocal sqs create-queue \
+  --queue-name new-activities-queue \
+  --region $REGION \
+  --attributes '{
+    "VisibilityTimeout": "30",
+    "MessageRetentionPeriod": "86400"
+  }'
+echo "  ✅ Queue new-activities-queue créée"
+
+awslocal sqs create-queue \
+  --queue-name alerts-declarations-queue \
+  --region $REGION \
+  --attributes '{
+    "VisibilityTimeout": "30",
+    "MessageRetentionPeriod": "86400"
+  }'
+echo "  ✅ Queue alerts-declarations-queue créée"
+
+echo "🔑 Création des secrets..."
+
+awslocal secretsmanager create-secret \
+  --name "poc/google-maps-api-key" \
+  --secret-string "{\"api_key\":\"${GOOGLE_MAPS_API_KEY}\"}" \
+  --region $REGION
+echo "  ✅ Secret Google Maps créé"
+
+awslocal secretsmanager create-secret \
+  --name "poc/slack-token" \
+  --secret-string "{\"token\":\"${SLACK_TOKEN}\",\"channel\":\"${SLACK_CHANNEL}\"}" \
+  --region $REGION
+echo "  ✅ Secret Slack créé"
+
+awslocal secretsmanager create-secret \
+  --name "poc/postgres-credentials" \
+  --secret-string "{\"user\":\"${POSTGRES_USER}\",\"password\":\"${POSTGRES_PASSWORD}\",\"db\":\"poc_sport\",\"host\":\"postgres\",\"port\":\"5432\"}" \
+  --region $REGION
+echo "  ✅ Secret PostgreSQL créé"
+
+echo "📄 Upload des fichiers RH..."
+
+if [ -f "/tmp/excel/employes.xlsx" ]; then
+  awslocal s3 cp /tmp/excel/employes.xlsx s3://poc-sport-raw/rh/employes.xlsx
+  echo "  ✅ Fichier RH uploadé"
+else
+  echo "  ⚠️  Fichier RH non trouvé dans /tmp/excel/"
+fi
+
+echo ""
+echo "📋 Vérification de l'initialisation..."
+echo "  Buckets S3 :"
+awslocal s3 ls
+echo "  Queues SQS :"
+awslocal sqs list-queues --region $REGION
+echo "  Secrets :"
+awslocal secretsmanager list-secrets --region $REGION
+
+echo ""
+echo "✅ Initialisation LocalStack terminée avec succès !"

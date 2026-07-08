@@ -1,0 +1,33 @@
+id: poc_sport_pipeline
+namespace: poc.sport
+
+labels:
+  env: poc
+  project: sport
+
+tasks:
+  - id: ingest-data
+    type: io.kestra.plugin.scripts.python.Commands
+    taskRunner:
+      type: io.kestra.plugin.core.runner.Process
+    beforeCommands:
+      - pip install -r /app/scripts/requirements.txt --quiet
+    commands:
+      - cd /app/scripts && python ingest_to_postgres.py
+
+  - id: ingest-gmap
+    type: io.kestra.plugin.scripts.python.Commands
+    taskRunner:
+      type: io.kestra.plugin.core.runner.Process
+    beforeCommands:
+      - pip install -r /app/scripts/requirements.txt --quiet
+    commands:
+      - cd /app/scripts && python gmap_distances.py
+      
+  - id: dbt-staging
+    type: io.kestra.plugin.scripts.shell.Commands
+    taskRunner:
+      type: io.kestra.plugin.core.runner.Process
+    commands:
+      - docker exec dbt dbt run --select staging --project-dir /dbt/poc_sport_dbt --profiles-dir /dbt
+
