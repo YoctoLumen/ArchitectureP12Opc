@@ -3,7 +3,9 @@ import json
 import glob
 import logging
 import psycopg2
+import re
 from datetime import datetime
+from slack_notifier import send_slack_alert
 from employees import load_employees
 
 logging.basicConfig(
@@ -32,8 +34,32 @@ def get_connection():
         log.error(f"❌ Connexion PostgreSQL échouée : {e}")
         raise
 
+def parse_adresse(adresse: str):
+    if not isinstance(adresse, str) or ',' not in adresse:
+        log.warning(f"Format d'adresse non reconnu : {adresse}")
+        return adresse, None, None
+
+    try:
+        parties = adresse.split(',', 1)
+        rue = parties[0].strip()
+        cp_ville = parties[1].strip()
+
+        match = re.match(r'^(\d{5})\s+(.+)$', cp_ville)
+        if match:
+            code_postal = match.group(1)
+            ville = match.group(2).strip()
+        else:
+            log.warning(f"Code postal non trouvé dans : {cp_ville}")
+            code_postal = None
+            ville = cp_ville
+
+        return rue, code_postal, ville
+
+    except Exception as e:
+        log.warning(f"Erreur adresse '{adresse}' : {e}")
+        return adresse, None, None
+    
 def ingest_employees(conn):
-    """Ingère les employés depuis Excel vers raw.employees."""
     log.info("👥 Chargement des employés depuis Excel...")
     df = load_employees()
 
@@ -42,18 +68,29 @@ def ingest_employees(conn):
     with conn.cursor() as cur:
         for _, row in df.iterrows():
             try:
+                rue, code_postal, ville = parse_adresse(row.get("adresse"))
                 cur.execute("""
                     INSERT INTO raw.employees
-                        (id, nom, prenom, adresse,
-                         salaire_brut_annuel, mode_transport_declare, actif)
-                    VALUES (%s, %s, %s, %s, %s, %s, TRUE)
-                    ON CONFLICT (id) DO NOTHING
+                        (id, nom, prenom, code_postal, ville, adresse,
+                         salaire_brut_annuel, date_embauche, mode_transport_declare, actif)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, TRUE)
+                    ON CONFLICT (id) DO UPDATE SET
+                        adresse                 = EXCLUDED.adresse,
+                        code_postal             = EXCLUDED.code_postal,
+                        ville                   = EXCLUDED.ville,
+                        salaire_brut_annuel     = EXCLUDED.salaire_brut_annuel,
+                        mode_transport_declare  = EXCLUDED.mode_transport_declare,
+                        date_embauche           = EXCLUDED.date_embauche,
+                        inserted_at             = now()
                 """, (
                     row["id_salarie"],
                     row["nom"],
                     row["prenom"],
+                    code_postal,
+                    ville,
                     row["adresse"],
                     row.get("salaire_brut"),
+                    row.get("date_embauche"),
                     row.get("mode_transport"),
                 ))
 
@@ -109,6 +146,19 @@ def ingest_activities(conn):
 
                     if cur.rowcount == 1:
                         inserted += 1
+                        cur.execute("""
+                            SELECT prenom, nom
+                            FROM raw.employees
+                            WHERE id = %s
+                        """, (str(act["id_salarie"]),))
+                        emp_row = cur.fetchone()
+
+                        if emp_row:
+                            employee = {
+                                "prenom": emp_row[0],
+                                "nom":    emp_row[1],
+                            }
+                            send_slack_alert(act, employee)
                     else:
                         skipped += 1
 
@@ -120,7 +170,6 @@ def ingest_activities(conn):
         conn.commit()
         log.info(f"  ✅ {inserted} insérées | {skipped} doublons | {errors} erreurs")
 
-        # Archive le fichier traité
         archive_path = os.path.join(
             ARCHIVE_DIR,
             os.path.basename(json_file)

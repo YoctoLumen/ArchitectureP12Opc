@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS raw.employees (
     salaire_brut_annuel     NUMERIC(12, 2),
     mode_transport_declare  VARCHAR(50),
     actif                   BOOLEAN DEFAULT TRUE,
-    date_entree             DATE,
+    date_embauche             DATE,
     inserted_at             TIMESTAMP DEFAULT NOW()
 );
 

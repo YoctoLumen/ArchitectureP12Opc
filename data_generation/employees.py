@@ -46,7 +46,8 @@ def load_employees() -> pd.DataFrame:
         "Moyen de déplacement": "mode_transport",
         "Salaire brut":         "salaire_brut",
         "Pratique d'un sport":  "sport_declare",
+        "Date d'embauche":      "date_embauche",
     })
 
-    return df[["id_salarie", "nom", "prenom", "adresse", "mode_transport",
+    return df[["id_salarie", "nom", "prenom", "adresse", "mode_transport","date_embauche",
                "salaire_brut", "sport_declare"]]

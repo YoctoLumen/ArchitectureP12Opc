@@ -17,9 +17,9 @@ models:
     staging:
       +schema: staging
       +materialized: incremental
-    intermediate:
-      +schema: intermediate
-      +materialized: incremental
+    # intermediate:
+    #  +schema: intermediate
+    #  +materialized: incremental
     mart:
       +schema: mart
       +materialized: incremental

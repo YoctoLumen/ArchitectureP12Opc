@@ -15,7 +15,7 @@ renamed as (
         salaire_brut_annuel                         as salaire_brut_annuel,
         mode_transport_declare                      as mode_transport_declare,
         actif                                       as est_actif,
-        date_entree                                 as date_entree,
+        date_embauche                               as date_embauche,
         inserted_at                                 as updated_at
     from source
     where actif = true

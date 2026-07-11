@@ -4,33 +4,40 @@ services:
     container_name: localstack
     ports:
       - "4566:4566"
-      - "4510-4559:4510-4559"
     env_file:
       - .env
     environment:
-      - SERVICES=s3,sqs,secretsmanager,iam
-      - DEFAULT_REGION=eu-west-1
+      - SERVICES=sqs
       - AWS_DEFAULT_REGION=eu-west-1
-      - DOCKER_HOST=unix:///var/run/docker.sock
-      - GOOGLE_MAPS_API_KEY=${GOOGLE_MAPS_API_KEY}   
-      - SLACK_TOKEN=${SLACK_TOKEN}                 
-      - SLACK_CHANNEL=${SLACK_CHANNEL}              
-      - POSTGRES_USER=${POSTGRES_USER}              
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
-      - "./localstack/init-scripts:/etc/localstack/init/ready.d"
-      - "./data/excel:/tmp/excel"
-      - "./data/json:/tmp/json"
       - "localstack_data:/var/lib/localstack"
-      - "/var/run/docker.sock:/var/run/docker.sock"
     networks:
-      - network-ingestion   
-      - network-storage     
+      - network-ingestion
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:4566/_localstack/health"]
       interval: 10s
       timeout: 5s
       retries: 5
+
+  slack-worker:
+    build:
+      context: ./data_generation
+      dockerfile: Dockerfile
+    container_name: slack-worker
+    command: python slack_worker.py
+    env_file:
+      - .env
+    environment:
+      - SQS_ENDPOINT=http://localstack:4566
+      - SQS_QUEUE_NAME=alerts-declarations-queue
+      - AWS_DEFAULT_REGION=eu-west-1
+      - POLL_INTERVAL=5
+    depends_on:
+      localstack:
+        condition: service_healthy
+    networks:
+      - network-ingestion
+    restart: unless-stopped
 
   postgres:
     image: postgres:15
@@ -106,6 +113,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - ./data_generation:/app/scripts 
+      - ./great_expectations:/app/great_expectations
       - /var/run/docker.sock:/var/run/docker.sock
       - kestra_storage:/app/storage
       - "./kestra/flows:/app/flows"

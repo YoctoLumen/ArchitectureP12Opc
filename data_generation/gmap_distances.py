@@ -32,10 +32,10 @@ ORS_PROFILE = {
 }
 
 REGLES_RAW = [
-    {"mots_cles": ["vehicule", "thermique", "electrique"], "max_m": 50_000, "mode": "driving"},
-    {"mots_cles": ["transport", "commun"],                 "max_m": 50_000, "mode": "driving"},
-    {"mots_cles": ["marche", "running"],                   "max_m": 15_000, "mode": "walking"},
-    {"mots_cles": ["velo", "trottinette", "autres"],       "max_m": 25_000, "mode": "bicycling"},
+    {"mots_cles": ["vehicule", "thermique", "electrique"], "max_m": 500_000, "mode": "driving"},
+    {"mots_cles": ["transport", "commun"],                 "max_m": 500_000, "mode": "driving"},
+    {"mots_cles": ["marche", "running"],                   "max_m": 30_000, "mode": "walking"},
+    {"mots_cles": ["velo", "trottinette", "autres"],       "max_m": 70_000, "mode": "bicycling"},
 ]
 
 def strip_accents(s):
@@ -49,7 +49,6 @@ def get_regle(mode):
     return None
 
 def geocode(adresse):
-    """Adresse → coordonnées GPS via ORS Geocoding (Pelias)."""
     try:
         r = requests.get(
             "https://api.openrouteservice.org/geocode/search",
@@ -68,7 +67,6 @@ def geocode(adresse):
         return None
 
 def get_distance(adresse, mode):
-    """Coordonnées GPS → distance en mètres via ORS Directions."""
     try:
         coords_origine = geocode(adresse)
         if not coords_origine:
@@ -92,7 +90,7 @@ def get_distance(adresse, mode):
         data = r.json()
         return int(data["routes"][0]["summary"]["distance"])
     except Exception as e:
-        log.error(f"❌ ORS Directions error : {e}")
+        log.error(f"ORS Directions error : {e}")
         return None
 
 def valider(distance_m, mode_declare):
@@ -147,7 +145,7 @@ def main():
 
         ok += valide
         ko += not valide
-        time.sleep(1.5)  # ⚠️ ORS free tier : 40 req/min
+        time.sleep(2.5)  
 
     conn.close()
     log.info(f"✅ Terminé — {ok} valides, {ko} rejets")

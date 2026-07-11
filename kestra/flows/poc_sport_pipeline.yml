@@ -5,7 +5,26 @@ labels:
   env: poc
   project: sport
 
+triggers:
+  - id: schedule-check-files
+    type: io.kestra.plugin.core.trigger.Schedule
+    cron: "* * * * *"  
+
 tasks:
+
+  - id: check-json-exists
+    type: io.kestra.plugin.scripts.shell.Commands
+    taskRunner:
+      type: io.kestra.plugin.core.runner.Process
+    commands:
+      - |
+        if ls /tmp/json/*.json 2>/dev/null | grep -q .; then
+            echo "Fichier(s) JSON détecté(s) — Démarrage du pipeline..."
+          else
+            echo "Aucun fichier JSON détecté dans /tmp/json/ — Pipeline arrêté."
+            exit 1
+          fi
+
   - id: ingest-data
     type: io.kestra.plugin.scripts.python.Commands
     taskRunner:
@@ -23,11 +42,33 @@ tasks:
       - pip install -r /app/scripts/requirements.txt --quiet
     commands:
       - cd /app/scripts && python gmap_distances.py
-      
+  
+  - id: fix-protobuf
+    type: io.kestra.plugin.scripts.shell.Commands
+    taskRunner:
+      type: io.kestra.plugin.core.runner.Process
+    commands:
+      - docker exec dbt pip install "protobuf==4.25.3" --quiet
+  
   - id: dbt-staging
     type: io.kestra.plugin.scripts.shell.Commands
     taskRunner:
       type: io.kestra.plugin.core.runner.Process
     commands:
       - docker exec dbt dbt run --select staging --project-dir /dbt/poc_sport_dbt --profiles-dir /dbt
+  
+  - id: dbt-mart
+    type: io.kestra.plugin.scripts.shell.Commands
+    taskRunner:
+      type: io.kestra.plugin.core.runner.Process
+    commands:
+      - docker exec dbt dbt run --select mart --project-dir /dbt/poc_sport_dbt --profiles-dir /dbt
 
+  - id: great-expectations
+    type: io.kestra.plugin.scripts.python.Commands
+    taskRunner:
+      type: io.kestra.plugin.core.runner.Process
+    beforeCommands:
+      - pip install "great-expectations==0.17.23" sqlalchemy psycopg2-binary --quiet
+    commands:
+      - python /app/great_expectations/run_ge_validations.py

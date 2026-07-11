@@ -17,18 +17,15 @@ def generate_activity(employee: dict, activity_date: datetime) -> dict:
     sport = employee.get("sport_declare")
     activity_type = pick_activity_type(sport)
 
-    # Distance
     dist_range = DISTANCE_RANGES[activity_type]
     distance = (
         random.randint(*dist_range) if dist_range[0] else None
     )
 
-    # Durée
     dur_range = DURATION_RANGES[activity_type]
     duration = random.randint(*dur_range)
     date_fin = activity_date + timedelta(minutes=duration)
 
-    # Commentaire
     comment = random.choice(COMMENTS.get(activity_type, [None]))
 
     return {
@@ -61,9 +58,7 @@ def generate_history(employees: list) -> list:
         if not should_generate(emp["sport_declare"]):
             continue
 
-        # Plus d'activités si sport déclaré, moins sinon
         if emp["sport_declare"]:
-            # Garantir que certains employés atteignent le seuil des 15 activités
             nb = random.randint(
                 ELIGIBILITY_THRESHOLD - 5,
                 MAX_ACTIVITIES_INIT

@@ -1,0 +1,70 @@
+version: 2
+
+models:
+  - name: mart_prime_sportive
+    description: >
+      Modèle mart calculant l'éligibilité et le montant de la prime sportive
+      pour chaque salarié actif, en fonction de son mode de déplacement déclaré
+      et de la distance valide calculée entre son domicile et l'entreprise.
+      Les salariés inactifs et les distances invalides sont exclus en amont
+      dans les modèles staging.
+    columns:
+      - name: employee_id
+        description: Identifiant unique du salarié
+        tests:
+          - not_null
+          - unique
+
+      - name: nom
+        description: Nom du salarié
+        tests:
+          - not_null
+
+      - name: prenom
+        description: Prénom du salarié
+        tests:
+          - not_null
+
+      - name: salaire_brut_annuel
+        description: Salaire annuel brut du salarié en euros
+        tests:
+          - not_null
+
+      - name: mode_transport_declare
+        description: Mode de transport déclaré par le salarié
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['velo', 'marche', 'trottinette', 'voiture',
+                       'transport_commun', 'moto']
+
+      - name: distance_domicile_travail_km
+        description: >
+          Distance en km entre le domicile et l'entreprise.
+          Calculée via Google Maps, uniquement les distances valides
+          (filtrées dans stg_distances).
+
+      - name: mode_transport_calcule
+        description: Mode de transport utilisé pour le calcul Google Maps
+
+      - name: distance_calculee_le
+        description: Date et heure du calcul de la distance
+
+      - name: est_eligible_prime
+        description: Booléen indiquant si le salarié est éligible à la prime sportive
+        tests:
+          - not_null
+          - accepted_values:
+              values: [true, false]
+
+      - name: montant_prime
+        description: >
+          Montant de la prime en euros.
+          Correspond à 5% du salaire annuel brut si éligible, 0 sinon.
+        tests:
+          - not_null
+
+      - name: motif_ineligibilite
+        description: >
+          Explication du motif d'inéligibilité.
+          Null si le salarié est éligible à la prime.
