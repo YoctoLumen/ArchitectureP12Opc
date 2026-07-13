@@ -1,4 +1,5 @@
 
+
 # Gérez un projet d'infrastructure - Projet 12 Data Engineer
 
 Projet de création d'une infrastructure de données, automatisation d'un pipeline etl et creation d'un dashboard. L'ensemble du projet est réalisé dans le cadre de la formation Openclassroom Data Engineer.
@@ -23,6 +24,7 @@ Il s'agit d'un poc réalisé dans le cadre d'une mission fictive ayant comme obj
 
 Le projet est réalisé via Docker afin de simulé une architecture Cloud
 
+<img width="806" height="781" alt="Capture d’écran 2026-07-13 093908" src="https://github.com/user-attachments/assets/9b2b7e7c-65fe-4aa9-8b21-98b80a2cd490" />
 
 
 ## Prérequis
